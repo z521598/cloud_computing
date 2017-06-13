@@ -6,18 +6,18 @@ import java.util.List;
  * Created by langshiquan on 17/6/12.
  */
 public class ResultBean {
-    List<NodeBean> nodeBeen;
+    List<NodeBean> node;
     List<LinkBean> link;
 
     public List<NodeBean> getNodeBeen() {
-        return nodeBeen;
+        return node;
     }
 
     public ResultBean() {
     }
 
-    public void setNodeBeen(List<NodeBean> nodeBeen) {
-        this.nodeBeen = nodeBeen;
+    public void setNode(List<NodeBean> node) {
+        this.node = node;
     }
 
     public List<LinkBean> getLink() {
@@ -28,9 +28,9 @@ public class ResultBean {
         this.link = link;
     }
 
-    public ResultBean(List<NodeBean> nodeBeen, List<LinkBean> link) {
+    public ResultBean(List<NodeBean> node, List<LinkBean> link) {
 
-        this.nodeBeen = nodeBeen;
+        this.node = node;
         this.link = link;
     }
 
