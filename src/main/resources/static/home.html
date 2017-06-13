@@ -89,8 +89,8 @@
 //
 //        ];
         //categories为node节点分类，categoriesshort为显示图例，后者比前者短，可以使得图例中没有主干人物
-        graph.categories = [{name: '504'}, {name: '女生'}, {name: '其他'}];
-        graph.categoriesshort = [{name: '504'}, {name: '女生'}, {name: '其他'}];
+        graph.categories = [{name: '请查看'}];
+        graph.categoriesshort = [{name: '请查看'}];
 
 
         // 设置关系图节点标记的大小
@@ -103,8 +103,8 @@
 
 
             title: {
-                text: '人际关系网络图',//标题
-                subtext: '人物关系',//标题副标题
+                text: '引用关系图',//标题
+                subtext: '软件一班六小只',//标题副标题
                 top: 'top',//相对在y轴上的位置
                 left: 'center'//相对在x轴上的位置
             },
@@ -154,9 +154,9 @@
             //sereis的数据: 用于设置图表数据之用
             series: [
                 {
-                    name: '人际关系',//系列名称
+                    name: '引用关系',//系列名称
                     type: 'graph',//图表类型
-                    layout: 'force',//echarts3的变化，force是力向图，circular是和弦图
+                    layout: 'circular',//echarts3的变化，force是力向图，circular是和弦图
                     draggable: true,//指示节点是否可以拖动
 
 
@@ -216,8 +216,8 @@
 <select id="sel">
     <option>请选择</option>
 </select>
-<input type="button" onclick="add()" value="添加论文"/><br/>
-<input type="text" readonly="readonly" id="pdfName"/><br/>
+请选择：<input type="button" onclick="add()" value="添加论文"/><br/>
+已选择论文：<input type="text" readonly="readonly" id="pdfName" size = "50"/><br/>
 <input type="button" onclick="get()" value="开始解析"/>
 <br/>
 <hr/>
