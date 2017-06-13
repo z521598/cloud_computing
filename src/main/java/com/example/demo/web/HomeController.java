@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.bean.ResultBean;
 import com.example.demo.service.PdfService;
 
 /**
@@ -12,19 +13,22 @@ import com.example.demo.service.PdfService;
  */
 @Controller
 public class HomeController {
+
     @Autowired
     private PdfService pdfService;
 
+
     @RequestMapping("/parsePdf")
     @ResponseBody
-    public String parsePdf(String pdf) {
-
-        return pdf;
+    public ResultBean parsePdf(String pdf) {
+        // 将字符串解析为数组
+        return pdfService.parsePdf(pdf.split(";"));
     }
 
     @RequestMapping("/")
     public String home(String pdf) {
         return "hello.html";
     }
+
 
 }

@@ -39,7 +39,7 @@ public class PdfUtils {
             sb = new StringBuffer();
             while (line != null) {
                 sb.append(line);
-                sb.append(" ");
+                sb.append("\n");
                 line = br.readLine();
             }
         } catch (Exception e) {
@@ -47,5 +47,10 @@ public class PdfUtils {
         }
 
         return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        String path = "/Users/langshiquan/Desktop/2.pdf";
+        System.out.println(parsePdfToTxt(path));
     }
 }
