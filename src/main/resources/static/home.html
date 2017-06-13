@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>云计算作业</title>
     <style media="screen">
-        #chart{
+        #chart {
             height: 500px;
             width: 100%;
         }
@@ -16,12 +16,12 @@
 <script src="/js/echarts.min.js"></script>
 <script>
     function get() {
-        console.log(123);
         var sel = $("#pdfName");
         var pdf = sel.val();
-        $.get("/parsePdf", {"pdf": pdf}, function (sign) {
-            console.log(456);
-            start(sign);
+        console.log("http get param:" + pdf)
+        $.get("/parsePdf", {"pdf": pdf}, function (res) {
+            console.log(res);
+            start(res);
         });
     }
 
@@ -35,55 +35,60 @@
         }
     }
     function start(json) {
+        // for local test
+        var json =
+                '{"nodes":[{"category":0,"name":0,"value":5,"label":"李佳林"},{"category":"0","name":"1","value":"5","label":"郎世权"}],"links":[{"source":0,"target":1,"value":2,"label":"引用"},{"source":1,"target":0,"value":2,"label":"引用"}]}';
         // 基于准备好的dom，初始化echarts实例
         var chart = echarts.init(document.getElementById('chart'));
 
         //准备好数据
         //以下为节点数据，每一个{}里面为一个节点，category（该节点类别），name（关系连接的关键字，可以理解为键值中的键，可为数字）
         //value(节点的值，可以设置节点半径与该值的关系)，label（该字段是我用来显示该节点标签的，可以改名），大家也可以自己设置其他字段
-        var graph = {};//数据
-        graph.nodes = [
-            {category: 0, name: 0, value: 5, label: '李佳林'},
-            {category: 0, name: 1, value: 2, label: '张成'},
-            {category: 0, name: 2, value: 2, label: '乔峙'},
-            {category: 0, name: 3, value: 2, label: '王健超'},
-
-            {category: 1, name: 4, value: 2, label: '李娅'},
-            {category: 1, name: 5, value: 2, label: '林芮竹'},
-            {category: 1, name: 6, value: 2, label: '杜建薇'},
-            {category: 1, name: 7, value: 2, label: '赵心扬'},
-
-            {category: 2, name: 8, value: 2, label: '郎世权'},
-            {category: 2, name: 9, value: 2, label: '马铭泽'},
-            {category: 2, name: 10, value: 2, label: '李文超'},
-            {category: 2, name: 11, value: 2, label: '魏闻'},
-        ];
-        //以下为连线关系数据，每一个{}里面为一个关系，source（起点，对应上面的name），target（终点，对应上面的name）
-        //value(起点到终点的距离，值越大，权重越大，距离越短)
-        graph.links = [
-            {source: 0, target: 1, value: 5, label: '室友'},
-            {source: 0, target: 2, value: 2, label: '室友'},
-            {source: 0, target: 3, value: 1, label: '室友'},
-            {source: 1, target: 2, value: 2, label: '室友'},
-            {source: 1, target: 3, value: 3, label: '室友'},
-            {source: 2, target: 3, value: 3, label: '室友'},
-            {source: 6, target: 7, value: 1, label: '同班'},
-
-            {source: 0, target: 5, value: 6, label: '恋人'},
-            {source: 2, target: 4, value: 1, label: '恋人'},
-            {source: 1, target: 6, value: 1, label: '暗恋'},
-            {source: 7, target: 2, value: 1, label: '暗恋'},
-            {source: 1, target: 7, value: 1, label: '讨厌'},
-
-            {source: 0, target: 8, value: 1, label: '师徒'},
-            {source: 1, target: 9, value: 1, label: '父子'},
-            {source: 10, target: 9, value: 1, label: '父子'},
-            {source: 2, target: 10, value: 1, label: '老乡'},
-            {source: 0, target: 6, value: 1, label: '老乡'},
-            {source: 0, target: 11, value: 1, label: '战友'},
-            {source: 2, target: 11, value: 1, label: '战友'},
-
-        ];
+//        var graph = {};//数据
+        var graph = eval('(' + json + ')');//数据
+        console.log(graph);
+//        graph.nodes = [
+//            {category: 0, name: 0, value: 5, label: '李佳林'},
+//            {category: 0, name: 1, value: 2, label: '张成'},
+//            {category: 0, name: 2, value: 2, label: '乔峙'},
+//            {category: 0, name: 3, value: 2, label: '王健超'},
+//
+//            {category: 1, name: 4, value: 2, label: '李娅'},
+//            {category: 1, name: 5, value: 2, label: '林芮竹'},
+//            {category: 1, name: 6, value: 2, label: '杜建薇'},
+//            {category: 1, name: 7, value: 2, label: '赵心扬'},
+//
+//            {category: 2, name: 8, value: 2, label: '郎世权'},
+//            {category: 2, name: 9, value: 2, label: '马铭泽'},
+//            {category: 2, name: 10, value: 2, label: '李文超'},
+//            {category: 2, name: 11, value: 2, label: '魏闻'},
+//        ];
+//        //以下为连线关系数据，每一个{}里面为一个关系，source（起点，对应上面的name），target（终点，对应上面的name）
+//        //value(起点到终点的距离，值越大，权重越大，距离越短)
+//        graph.links = [
+//            {source: 0, target: 1, value: 5, label: '室友'},
+//            {source: 0, target: 2, value: 2, label: '室友'},
+//            {source: 0, target: 3, value: 1, label: '室友'},
+//            {source: 1, target: 2, value: 2, label: '室友'},
+//            {source: 1, target: 3, value: 3, label: '室友'},
+//            {source: 2, target: 3, value: 3, label: '室友'},
+//            {source: 6, target: 7, value: 1, label: '同班'},
+//
+//            {source: 0, target: 5, value: 6, label: '恋人'},
+//            {source: 2, target: 4, value: 1, label: '恋人'},
+//            {source: 1, target: 6, value: 1, label: '暗恋'},
+//            {source: 7, target: 2, value: 1, label: '暗恋'},
+//            {source: 1, target: 7, value: 1, label: '讨厌'},
+//
+//            {source: 0, target: 8, value: 1, label: '师徒'},
+//            {source: 1, target: 9, value: 1, label: '父子'},
+//            {source: 10, target: 9, value: 1, label: '父子'},
+//            {source: 2, target: 10, value: 1, label: '老乡'},
+//            {source: 0, target: 6, value: 1, label: '老乡'},
+//            {source: 0, target: 11, value: 1, label: '战友'},
+//            {source: 2, target: 11, value: 1, label: '战友'},
+//
+//        ];
         //categories为node节点分类，categoriesshort为显示图例，后者比前者短，可以使得图例中没有主干人物
         graph.categories = [{name: '504'}, {name: '女生'}, {name: '其他'}];
         graph.categoriesshort = [{name: '504'}, {name: '女生'}, {name: '其他'}];
@@ -198,12 +203,23 @@
         chart.setOption(option);
     }
 </script>
+<script>
+    $(function () {
+        $.get("/getAllFile", function (res) {
+            console.log(res);
+//            res = '["123你好", "1234阿斯顿撒", "12阿斯顿35", "1236撒旦", "1237打算"]';
+            var arr = eval("(" + res + ")");
+            console.log(arr);
+            var select = $("#sel");
+            for (var i = 0; i < arr.length; i++) {
+                var opt = $("<option>" + arr[i] + "</option>");
+                select.append(opt);
+            }
+        });
+    })
+</script>
 <select id="sel">
     <option>请选择</option>
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
 </select>
 <input type="button" onclick="add()" value="添加论文"/><br/>
 <input type="text" readonly="readonly" id="pdfName"/><br/>

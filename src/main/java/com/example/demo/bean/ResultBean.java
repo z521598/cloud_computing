@@ -6,31 +6,31 @@ import java.util.List;
  * Created by langshiquan on 17/6/12.
  */
 public class ResultBean {
-    List<NodeBean> node;
+    List<NodeBean> nodes;
     List<LinkBean> link;
 
-    public List<NodeBean> getNodeBeen() {
-        return node;
+    public List<NodeBean> getNodes() {
+        return nodes;
     }
 
     public ResultBean() {
     }
 
-    public void setNode(List<NodeBean> node) {
-        this.node = node;
+    public void setNodes(List<NodeBean> nodes) {
+        this.nodes = nodes;
     }
 
-    public List<LinkBean> getLink() {
+    public List<LinkBean> getLinks() {
         return link;
     }
 
-    public void setLink(List<LinkBean> link) {
+    public void setLinks(List<LinkBean> link) {
         this.link = link;
     }
 
-    public ResultBean(List<NodeBean> node, List<LinkBean> link) {
+    public ResultBean(List<NodeBean> nodes, List<LinkBean> link) {
 
-        this.node = node;
+        this.nodes = nodes;
         this.link = link;
     }
 

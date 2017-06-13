@@ -1,5 +1,6 @@
 package com.example.demo.web;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,15 @@ public class HomeController {
     }
 
     @RequestMapping("/getAllFile")
+    @ResponseBody
     public List<String> getAllFile() {
-
-        return null;
+        List<String> list = new LinkedList<>();
+        list.add("123你好");
+        list.add("1234阿斯顿撒");
+        list.add("12阿斯顿35");
+        list.add("1236撒旦");
+        list.add("1237打算");
+        return list;
     }
 
 }

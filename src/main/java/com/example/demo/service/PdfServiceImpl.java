@@ -1,11 +1,18 @@
 package com.example.demo.service;
 
+import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.bean.LinkBean;
+import com.example.demo.bean.NodeBean;
+import com.example.demo.bean.PdfBean;
 import com.example.demo.bean.ResultBean;
 import com.example.demo.utils.FileUtils;
+import com.example.demo.utils.PdfUtils;
+import com.example.demo.utils.StringUtils;
 
 /**
  * Created by langshiquan on 17/6/12.
@@ -13,14 +20,23 @@ import com.example.demo.utils.FileUtils;
 @Service
 public class PdfServiceImpl implements PdfService {
 
+    @Value("${file.pdf.home}")
+    private String pdfHome;
+
     @Override
     public ResultBean parsePdf(String[] pdfPath) {
         // 获取文件路径
         ResultBean resultBean = new ResultBean();
+        List<NodeBean> nodes = new LinkedList<>();
+        List<LinkBean> link = new LinkedList<>();
         List<String> filePaths = FileUtils.getFilePath(pdfPath);
-        for (int i = 0; i < filePaths.size(); i++) {
+        // 兼容最后一个分号
+        for (int i = 0; i < filePaths.size() - 1; i++) {
+            String pdfTxt = PdfUtils.parsePdfToTxt(filePaths.get(i));
+            PdfBean pdfBean = StringUtils.parsePdfString(pdfTxt);
+            pdfBean.getAuthor();
+            pdfBean.getRef();
 
-            // TODO 业务处理
         }
         return resultBean;
     }
