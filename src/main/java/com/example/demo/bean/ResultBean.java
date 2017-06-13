@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class ResultBean {
     List<NodeBean> nodes;
-    List<LinkBean> link;
+    List<LinkBean> links;
 
     public List<NodeBean> getNodes() {
         return nodes;
@@ -21,17 +21,17 @@ public class ResultBean {
     }
 
     public List<LinkBean> getLinks() {
-        return link;
+        return links;
     }
 
-    public void setLinks(List<LinkBean> link) {
-        this.link = link;
+    public void setLinks(List<LinkBean> links) {
+        this.links = links;
     }
 
-    public ResultBean(List<NodeBean> nodes, List<LinkBean> link) {
+    public ResultBean(List<NodeBean> nodes, List<LinkBean> links) {
 
         this.nodes = nodes;
-        this.link = link;
+        this.links = links;
     }
 
 }
