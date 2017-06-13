@@ -2,26 +2,19 @@ package com.example.demo.utils;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+
+import com.example.demo.service.PdfServiceImpl;
 
 /**
  * Created by langshiquan on 17/6/13.
  */
 public class FileUtils {
-    private static Map<String, String> fileMap;
-
-    static {
-        fileMap = new HashMap<>();
-        // TODO 动态获取
-        fileMap.put("fileName", "/path");
-    }
 
     // 根据文件名字，获取文件全路径
     public static String getFilePath(String fileName) {
-        return fileMap.get(fileName);
+        return PdfServiceImpl.pdfHome + fileName;
     }
 
     public static List<String> getFilePath(String[] fileNames) {
@@ -32,7 +25,7 @@ public class FileUtils {
         return list;
     }
 
-    public static List<String> getFileName(String path){
+    public static List<String> getFileNameList(String path) {
         //根据文件夹路径；得到文件夹下所有文件名
         List<String> list = new ArrayList<>();
         File file = new File(path);
@@ -43,8 +36,8 @@ public class FileUtils {
                 return null;
             } else {
                 for (File afile : files) {
-                    if (afile.isDirectory()) {
-                        list.add(afile.getName()) ;
+                    if (afile.isFile()) {
+                        list.add(afile.getName());
                     }
                 }
                 return list;

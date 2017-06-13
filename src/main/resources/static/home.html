@@ -44,7 +44,6 @@
         //准备好数据
         //以下为节点数据，每一个{}里面为一个节点，category（该节点类别），name（关系连接的关键字，可以理解为键值中的键，可为数字）
         //value(节点的值，可以设置节点半径与该值的关系)，label（该字段是我用来显示该节点标签的，可以改名），大家也可以自己设置其他字段
-//        var graph = {};//数据
         var graph = eval('(' + json + ')');//数据
         console.log(graph);
 //        graph.nodes = [
@@ -206,13 +205,9 @@
 <script>
     $(function () {
         $.get("/getAllFile", function (res) {
-            console.log(res);
-//            res = '["123你好", "1234阿斯顿撒", "12阿斯顿35", "1236撒旦", "1237打算"]';
-            var arr = eval("(" + res + ")");
-            console.log(arr);
             var select = $("#sel");
-            for (var i = 0; i < arr.length; i++) {
-                var opt = $("<option>" + arr[i] + "</option>");
+            for (var i = 0; i < res.length; i++) {
+                var opt = $("<option>" + res[i] + "</option>");
                 select.append(opt);
             }
         });

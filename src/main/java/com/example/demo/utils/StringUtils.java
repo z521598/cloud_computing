@@ -57,7 +57,7 @@ public class StringUtils {
 
     public static void main(String[] args) {
         String pdfdemo = PdfUtils.parsePdfToTxt("/Users/langshiquan/Desktop/cloud/pdfs/test.pdf");
-                System.out.println(pdfdemo);
+        System.out.println(pdfdemo);
         PdfBean pdfBean = parsePdfString(pdfdemo);
         System.out.println(pdfBean);
     }
