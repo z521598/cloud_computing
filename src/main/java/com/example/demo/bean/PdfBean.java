@@ -9,6 +9,9 @@ public class PdfBean {
     List<String> author;
     List<String> ref;
 
+    public PdfBean() {
+    }
+
     public List<String> getAuthor() {
         return author;
     }
