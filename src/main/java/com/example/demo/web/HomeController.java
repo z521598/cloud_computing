@@ -1,5 +1,7 @@
 package com.example.demo.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +19,6 @@ public class HomeController {
     @Autowired
     private PdfService pdfService;
 
-
     @RequestMapping("/parsePdf")
     @ResponseBody
     public ResultBean parsePdf(String pdf) {
@@ -27,8 +28,13 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(String pdf) {
-        return "hello.html";
+        return "home.html";
     }
 
+    @RequestMapping("/getAllFile")
+    public List<String> getAllFile() {
+
+        return null;
+    }
 
 }

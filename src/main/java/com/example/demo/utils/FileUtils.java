@@ -13,7 +13,7 @@ public class FileUtils {
 
     static {
         fileMap = new HashMap<>();
-        // TODO
+        // TODO 动态获取
         fileMap.put("fileName", "/path");
     }
 

@@ -49,8 +49,8 @@ public class PdfUtils {
         return sb.toString();
     }
 
-    public static void main(String[] args) {
-        String path = "/Users/langshiquan/Desktop/2.pdf";
-        System.out.println(parsePdfToTxt(path));
-    }
+//    public static void main(String[] args) {
+//        String path = "/Users/langshiquan/Desktop/2.pdf";
+//        System.out.println(parsePdfToTxt(path));
+//    }
 }

@@ -24,4 +24,9 @@ public class PdfServiceImpl implements PdfService {
         }
         return resultBean;
     }
+
+    @Override
+    public List<String> getPdfList(String path) {
+        return null;
+    }
 }

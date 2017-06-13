@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+
 import java.util.List;
 
 import com.example.demo.bean.ResultBean;
@@ -9,4 +10,6 @@ import com.example.demo.bean.ResultBean;
  */
 public interface PdfService {
     ResultBean parsePdf(String[] pdfPath);
+
+    List<String> getPdfList(String path);
 }

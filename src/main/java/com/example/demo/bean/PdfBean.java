@@ -32,4 +32,22 @@ public class PdfBean {
         this.author = author;
         this.ref = ref;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("author:").append(author.size()).append(" {");
+        for (int i = 0; i < author.size(); i++) {
+            stringBuilder.append(author.get(i)).append(",");
+        }
+        stringBuilder.append("}");
+        stringBuilder.append("ref:").append(ref.size()).append(" {");
+        for (int i = 0; i < ref.size(); i++) {
+            stringBuilder.append(ref.get(i)).append(",");
+        }
+        stringBuilder.append("}");
+
+
+        return stringBuilder.toString();
+    }
 }
