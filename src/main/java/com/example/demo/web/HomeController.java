@@ -26,6 +26,7 @@ public class HomeController {
     @RequestMapping("/parsePdf")
     @ResponseBody
     public ResultBean parsePdf(String pdf) {
+        System.out.println("come a get parsePdf request");
         // 将字符串解析为数组
         return pdfService.parsePdf(pdf.split(";"));
     }

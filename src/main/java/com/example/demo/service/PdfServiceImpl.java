@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-
 import com.example.demo.bean.LinkBean;
 import com.example.demo.bean.NodeBean;
 import com.example.demo.bean.PdfBean;
@@ -8,6 +7,7 @@ import com.example.demo.bean.ResultBean;
 import com.example.demo.utils.FileUtils;
 import com.example.demo.utils.PdfUtils;
 import com.example.demo.utils.StringUtils;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +19,10 @@ import java.util.List;
  */
 @Service
 public class PdfServiceImpl implements PdfService {
-	static int No = 1;
+    static int No = 1;
+
     @Value("${file.pdf.home}")
-    public static String pdfHome;
+    private String pdfHome;
 
     @Override
     public ResultBean parsePdf(String[] pdfPath) {
@@ -29,92 +30,94 @@ public class PdfServiceImpl implements PdfService {
         ResultBean resultBean = new ResultBean();
         List<NodeBean> nodes = new LinkedList<>();
         List<LinkBean> links = new LinkedList<>();
-        List<String> filePaths = FileUtils.getFilePath(pdfPath);
         // 兼容最后一个分号
-        for (int i = 0; i < filePaths.size() - 1; i++) {
-            String pdfTxt = PdfUtils.parsePdfToTxt(filePaths.get(i));
+        for (int i = 0; i < pdfPath.length; i++) {
+            String pdfTxt = PdfUtils.parsePdfToTxt(pdfHome + pdfPath[i]);
             PdfBean pdfBean = StringUtils.parsePdfString(pdfTxt);
-            // TODO qiaozhi
-			List<String> getAuthors = pdfBean.getAuthor();
-    		List<String> getRefs = pdfBean.getRef();
-			doPDF(nodes,links,getAuthors,getRefs);
+            List<String> getAuthors = pdfBean.getAuthor();
+            List<String> getRefs = pdfBean.getRef();
+            doPDF(nodes, links, getAuthors, getRefs);
 
         }
         resultBean.setLinks(links);
         resultBean.setNodes(nodes);
         return resultBean;
     }
-	
+
     @Override
     public List<String> getPdfList(String path) {
         return FileUtils.getFileNameList(path);
     }
-	/*qiaozhi 处理两个LIST*/
-	public void doPDF(List<NodeBean> nodes,List<LinkBean> links, List<String> authors,List<String> refs){
-System.out.println("开始执行doPDF");
-    	//List<LinkBean> linkbeans = new ArrayList();
-		for(String author : authors){
-			if(!isContained(nodes,author)){
-				NodeBean nodebean = new NodeBean();
-				//nodebean.setCategory(1);
-				nodebean.setLabel(author);
-				nodebean.setName(No);
-				nodebean.setValue(0);
-				nodes.add(nodebean);
-System.out.println(author+"添加成功,信息如下:"+nodebean.getName());
-				No++;
-			}
-			for(String ref : refs){
-				if(!isContained(nodes,ref)){
-					NodeBean nodebean = new NodeBean();
-					//nodebean.setCategory(1);
-					nodebean.setLabel(ref);
-					nodebean.setName(No);
-					nodebean.setValue(0);
-					nodes.add(nodebean);
-					No++;
-System.out.println(ref+"添加成功,信息如下:"+nodebean.getName());
-				}
-				
-				LinkBean temp = new LinkBean();
-                changeValue(nodes,ref);
-				temp.setSource(lableTOname(nodes,author));
-				temp.setTarget(lableTOname(nodes,ref));
-				links.add(temp);
-			}
-			/*for(String ref2 : refs){
-				changeValue(ref2);
+
+    /*qiaozhi 处理两个LIST*/
+    public void doPDF(List<NodeBean> nodes, List<LinkBean> links, List<String> authors, List<String> refs) {
+        System.out.println("开始执行doPDF");
+        //List<LinkBean> linkbeans = new ArrayList();
+        for (String author : authors) {
+            if (!isContained(nodes, author)) {
+                NodeBean nodebean = new NodeBean();
+                //nodebean.setCategory(1);
+                nodebean.setLabel(author);
+                nodebean.setName(No);
+                nodebean.setValue(0);
+                nodes.add(nodebean);
+                System.out.println(author + "添加成功,信息如下:" + nodebean.getName());
+                No++;
+            }
+            for (String ref : refs) {
+                if (!isContained(nodes, ref)) {
+                    NodeBean nodebean = new NodeBean();
+                    //nodebean.setCategory(1);
+                    nodebean.setLabel(ref);
+                    nodebean.setName(No);
+                    nodebean.setValue(0);
+                    nodes.add(nodebean);
+                    No++;
+                    System.out.println(ref + "添加成功,信息如下:" + nodebean.getName());
+                }
+
+                LinkBean temp = new LinkBean();
+                changeValue(nodes, ref);
+                temp.setSource(lableTOname(nodes, author));
+                temp.setTarget(lableTOname(nodes, ref));
+                links.add(temp);
+            }
+            /*for(String ref2 : refs){
+                changeValue(ref2);
 			}
 			*/
-		}
+        }
     }
-	/*qiaozhi 判断此人是否之前存在*/
-	public boolean isContained(List<NodeBean> l,String name){
-    	boolean flag = false;
-    	for(NodeBean nb : l){
-    		if(nb.getLabel() == name){
-    			flag = true;
-    		}
-    	}
-    	return flag;
+
+    /*qiaozhi 判断此人是否之前存在*/
+    public boolean isContained(List<NodeBean> l, String name) {
+        boolean flag = false;
+        for (NodeBean nb : l) {
+            if (nb.getLabel() == name) {
+                flag = true;
+            }
+        }
+        return flag;
     }
-	/*qiaozhi 读入人的名字得到人的编号*/
-    public int lableTOname(List<NodeBean> nodes,String lable){
-    	for(NodeBean nb : nodes){
-    		if(nb.getLabel() == lable){
-    			return nb.getName();
-    		}
-    	}
-    	return -1;
+
+    /*qiaozhi 读入人的名字得到人的编号*/
+    public int lableTOname(List<NodeBean> nodes, String lable) {
+        for (NodeBean nb : nodes) {
+            if (nb.getLabel() == lable) {
+                return nb.getName();
+            }
+        }
+        return -1;
     }
-	/*qiaozhi 改变引用次数*/
-    public void changeValue(List<NodeBean> nodes,String lable){
-    	for(NodeBean nb : nodes){
-    		if(nb.getLabel() == lable){
-    			Integer value = nb.getValue();
-    			value = value + 1;
-    			nb.setValue(value);
-    		}
-    	}
+
+    /*qiaozhi 改变引用次数*/
+    public void changeValue(List<NodeBean> nodes, String lable) {
+        for (NodeBean nb : nodes) {
+            if (nb.getLabel() == lable) {
+                Integer value = nb.getValue();
+                value = value + 1;
+                nb.setValue(value);
+            }
+        }
     }
 }

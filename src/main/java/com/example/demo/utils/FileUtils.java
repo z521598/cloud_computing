@@ -12,19 +12,6 @@ import com.example.demo.service.PdfServiceImpl;
  */
 public class FileUtils {
 
-    // 根据文件名字，获取文件全路径
-    public static String getFilePath(String fileName) {
-        return PdfServiceImpl.pdfHome + fileName;
-    }
-
-    public static List<String> getFilePath(String[] fileNames) {
-        List<String> list = new LinkedList<>();
-        for (int i = 0; i < fileNames.length; i++) {
-            list.add(getFilePath(fileNames[i]));
-        }
-        return list;
-    }
-
     public static List<String> getFileNameList(String path) {
         //根据文件夹路径；得到文件夹下所有文件名
         List<String> list = new ArrayList<>();

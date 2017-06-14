@@ -35,7 +35,6 @@ public class StringUtils {
         for (int i = 0; i < ps_array.length; i++) {
             boolean isMatch = Pattern.matches(reg_quote, ps_array[i]);
             if (isMatch) {
-                System.out.println("???");
                 System.out.println(ps_array[i]);
                 String[] temp_arr = ps_array[i].split("\\.");
                 String temp_str = temp_arr[0].substring(4); //第一个.前面是引用作者，除去开头[数字]加一个空格，共4个字符
