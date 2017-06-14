@@ -15,6 +15,10 @@ public class LinkBean {
     // 引用者
     String label = "引用";
 
+    public LinkBean () {
+
+    }
+
     public Integer getSource() {
         return source;
     }
