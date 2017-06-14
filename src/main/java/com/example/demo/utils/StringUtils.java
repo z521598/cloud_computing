@@ -21,7 +21,7 @@ public class StringUtils {
         List<String> quote_list = new ArrayList<String>();
 
         String reg_line = "\n"; // 分割文章正则
-        String reg_quote = "^\\[[0-9]\\]\\s(.*)"; // 获取引用正则
+        String reg_quote = "^\\[[0-9]{1,3}\\]\\s(.*)"; // 获取引用正则
 
         String[] ps_array = pdfString.split(reg_line);
         /* 获取作者 */
