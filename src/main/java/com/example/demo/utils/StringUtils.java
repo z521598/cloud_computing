@@ -21,12 +21,13 @@ public class StringUtils {
         List<String> quote_list = new ArrayList<String>();
 
         String reg_line = "\n"; // 分割文章正则
-        String reg_quote = "^\\[[0-9]\\]\\s(.*)"; // 获取引用正则
+        String reg_quote = "^\\[[0-9]{1,3}\\]\\s(.*)"; // 获取引用正则
+        String reg_comma = "[\\,\\，]"; //中英文逗号正则
 
         String[] ps_array = pdfString.split(reg_line);
         /* 获取作者 */
         author_str = ps_array[1]; // 第二行（即ps_array[1]）为作者
-        author_arr = author_str.split("\\，");
+        author_arr = author_str.split(reg_comma);
         for (int i = 0; i < author_arr.length; i++) {
             author_list.add(author_arr[i].trim());
         }
