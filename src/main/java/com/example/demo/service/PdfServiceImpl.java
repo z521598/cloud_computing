@@ -78,13 +78,15 @@ System.out.println(ref+"添加成功,信息如下:"+nodebean.getName());
 				}
 				
 				LinkBean temp = new LinkBean();
+                changeValue(ref);
 				temp.setSource(lableTOname(author));
 				temp.setTarget(lableTOname(ref));
 				links.add(temp);
 			}
-			for(String ref2 : refs){
+			/*for(String ref2 : refs){
 				changeValue(ref2);
 			}
+			*/
 		}
     }
 	/*qiaozhi 判断此人是否之前存在*/
