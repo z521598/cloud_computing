@@ -26,16 +26,20 @@ public class PdfServiceImpl implements PdfService {
         // 获取文件路径
         ResultBean resultBean = new ResultBean();
         List<NodeBean> nodes = new LinkedList<>();
-        List<LinkBean> link = new LinkedList<>();
+        List<LinkBean> links = new LinkedList<>();
         List<String> filePaths = FileUtils.getFilePath(pdfPath);
         // 兼容最后一个分号
         for (int i = 0; i < filePaths.size() - 1; i++) {
             String pdfTxt = PdfUtils.parsePdfToTxt(filePaths.get(i));
             PdfBean pdfBean = StringUtils.parsePdfString(pdfTxt);
+
+            // TODO qiaozhi
             pdfBean.getAuthor();
             pdfBean.getRef();
 
         }
+        resultBean.setLinks(links);
+        resultBean.setNodes(nodes);
         return resultBean;
     }
 
