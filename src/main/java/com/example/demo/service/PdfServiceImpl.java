@@ -56,10 +56,8 @@ public class PdfServiceImpl implements PdfService {
         for (String author : authors) {
             if (!isContained(nodes, author)) {
                 NodeBean nodebean = new NodeBean();
-                //nodebean.setCategory(1);
                 nodebean.setLabel(author);
                 nodebean.setName(No);
-                nodebean.setValue(0);
                 nodes.add(nodebean);
                 System.out.println(author + "添加成功,信息如下:" + nodebean.getName());
                 No++;
@@ -67,10 +65,8 @@ public class PdfServiceImpl implements PdfService {
             for (String ref : refs) {
                 if (!isContained(nodes, ref)) {
                     NodeBean nodebean = new NodeBean();
-                    //nodebean.setCategory(1);
                     nodebean.setLabel(ref);
                     nodebean.setName(No);
-                    nodebean.setValue(0);
                     nodes.add(nodebean);
                     No++;
                     System.out.println(ref + "添加成功,信息如下:" + nodebean.getName());
@@ -93,7 +89,7 @@ public class PdfServiceImpl implements PdfService {
     public boolean isContained(List<NodeBean> l, String name) {
         boolean flag = false;
         for (NodeBean nb : l) {
-            if (nb.getLabel() == name) {
+            if (nb.getLabel().equals(name)) {
                 flag = true;
             }
         }
@@ -103,7 +99,7 @@ public class PdfServiceImpl implements PdfService {
     /*qiaozhi 读入人的名字得到人的编号*/
     public int lableTOname(List<NodeBean> nodes, String lable) {
         for (NodeBean nb : nodes) {
-            if (nb.getLabel() == lable) {
+            if (nb.getLabel().equals(lable)) {
                 return nb.getName();
             }
         }
@@ -113,7 +109,7 @@ public class PdfServiceImpl implements PdfService {
     /*qiaozhi 改变引用次数*/
     public void changeValue(List<NodeBean> nodes, String lable) {
         for (NodeBean nb : nodes) {
-            if (nb.getLabel() == lable) {
+            if (nb.getLabel().equals(lable)) {
                 Integer value = nb.getValue();
                 value = value + 1;
                 nb.setValue(value);

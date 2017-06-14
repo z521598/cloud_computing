@@ -8,8 +8,8 @@ public class NodeBean {
     Integer name;
     // 固定值
     Integer category = 0;
-    // 被引用的次数
-    Integer value;
+    // 被引用的次数,初始值是1
+    Integer value = 1;
     // 作者名字
     String label;
 
