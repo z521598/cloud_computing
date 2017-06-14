@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+
 import com.example.demo.bean.LinkBean;
 import com.example.demo.bean.NodeBean;
 import com.example.demo.bean.PdfBean;
@@ -7,6 +8,7 @@ import com.example.demo.bean.ResultBean;
 import com.example.demo.utils.FileUtils;
 import com.example.demo.utils.PdfUtils;
 import com.example.demo.utils.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -18,16 +20,15 @@ import java.util.List;
 @Service
 public class PdfServiceImpl implements PdfService {
 	static int No = 1;
-    public static final String pdfHome = "/Users/langshiquan/Desktop/cloud/pdfs/";
-	List<NodeBean> nodes = new LinkedList<>();
-	List<LinkBean> links = new LinkedList<>();
+    @Value("${file.pdf.home}")
+    public static String pdfHome;
+
     @Override
     public ResultBean parsePdf(String[] pdfPath) {
         // 获取文件路径
         ResultBean resultBean = new ResultBean();
-		/*下面两个LIST放到全局了*/
-        //List<NodeBean> nodes = new LinkedList<>();
-        //List<LinkBean> links = new LinkedList<>();
+        List<NodeBean> nodes = new LinkedList<>();
+        List<LinkBean> links = new LinkedList<>();
         List<String> filePaths = FileUtils.getFilePath(pdfPath);
         // 兼容最后一个分号
         for (int i = 0; i < filePaths.size() - 1; i++) {
@@ -36,9 +37,7 @@ public class PdfServiceImpl implements PdfService {
             // TODO qiaozhi
 			List<String> getAuthors = pdfBean.getAuthor();
     		List<String> getRefs = pdfBean.getRef();
-			doPDF(getAuthors,getRefs);
-            pdfBean.getAuthor();
-            pdfBean.getRef();
+			doPDF(nodes,links,getAuthors,getRefs);
 
         }
         resultBean.setLinks(links);
@@ -51,7 +50,7 @@ public class PdfServiceImpl implements PdfService {
         return FileUtils.getFileNameList(path);
     }
 	/*qiaozhi 处理两个LIST*/
-	public void doPDF(List<String> authors,List<String> refs){
+	public void doPDF(List<NodeBean> nodes,List<LinkBean> links, List<String> authors,List<String> refs){
 System.out.println("开始执行doPDF");
     	//List<LinkBean> linkbeans = new ArrayList();
 		for(String author : authors){
@@ -78,9 +77,9 @@ System.out.println(ref+"添加成功,信息如下:"+nodebean.getName());
 				}
 				
 				LinkBean temp = new LinkBean();
-                changeValue(ref);
-				temp.setSource(lableTOname(author));
-				temp.setTarget(lableTOname(ref));
+                changeValue(nodes,ref);
+				temp.setSource(lableTOname(nodes,author));
+				temp.setTarget(lableTOname(nodes,ref));
 				links.add(temp);
 			}
 			/*for(String ref2 : refs){
@@ -100,7 +99,7 @@ System.out.println(ref+"添加成功,信息如下:"+nodebean.getName());
     	return flag;
     }
 	/*qiaozhi 读入人的名字得到人的编号*/
-    public int lableTOname(String lable){
+    public int lableTOname(List<NodeBean> nodes,String lable){
     	for(NodeBean nb : nodes){
     		if(nb.getLabel() == lable){
     			return nb.getName();
@@ -109,7 +108,7 @@ System.out.println(ref+"添加成功,信息如下:"+nodebean.getName());
     	return -1;
     }
 	/*qiaozhi 改变引用次数*/
-    public void changeValue(String lable){
+    public void changeValue(List<NodeBean> nodes,String lable){
     	for(NodeBean nb : nodes){
     		if(nb.getLabel() == lable){
     			Integer value = nb.getValue();
