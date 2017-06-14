@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.bean.LinkBean;
@@ -19,7 +20,8 @@ import com.example.demo.utils.StringUtils;
 @Service
 public class PdfServiceImpl implements PdfService {
 
-    public static final String pdfHome = "/Users/langshiquan/Desktop/cloud/pdfs/";
+    @Value("${file.pdf.home}")
+    public static String pdfHome;
 
     @Override
     public ResultBean parsePdf(String[] pdfPath) {
