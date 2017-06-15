@@ -43,7 +43,7 @@ public class StringUtils {
             }
         }
         quote_str = quote_strbfr.toString();
-        System.out.println("quote_str=" + quote_str);
+//        System.out.println("quote_str=" + quote_str);
         quote_arr = quote_str.split("\\,");
         for (int i = 0; i < quote_arr.length; i++) {
             quote_list.add(quote_arr[i].trim());

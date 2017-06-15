@@ -55,4 +55,12 @@ public class NodeBean {
         this.value = value;
         this.label = label;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("{name:").append(name).append(";").append("value:").append(value).append(";");
+        stringBuilder.append("label:").append(label).append("}");
+        return stringBuilder.toString();
+    }
 }

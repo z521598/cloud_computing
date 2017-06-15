@@ -15,7 +15,7 @@ public class LinkBean {
     // 引用者
     String label = "引用";
 
-    public LinkBean () {
+    public LinkBean() {
 
     }
 
@@ -56,5 +56,12 @@ public class LinkBean {
         this.target = target;
         this.value = value;
         this.label = label;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("{source:").append(source).append(";").append("target:").append(target).append("}");
+        return stringBuilder.toString();
     }
 }

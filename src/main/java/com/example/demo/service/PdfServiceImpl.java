@@ -34,6 +34,7 @@ public class PdfServiceImpl implements PdfService {
         for (int i = 0; i < pdfPath.length; i++) {
             String pdfTxt = PdfUtils.parsePdfToTxt(pdfHome + pdfPath[i]);
             PdfBean pdfBean = StringUtils.parsePdfString(pdfTxt);
+            System.out.println(pdfBean);
             List<String> getAuthors = pdfBean.getAuthor();
             List<String> getRefs = pdfBean.getRef();
             doPDF(nodes, links, getAuthors, getRefs);
@@ -41,6 +42,7 @@ public class PdfServiceImpl implements PdfService {
         }
         resultBean.setLinks(links);
         resultBean.setNodes(nodes);
+        System.out.println(resultBean);
         return resultBean;
     }
 
@@ -78,10 +80,6 @@ public class PdfServiceImpl implements PdfService {
                 temp.setTarget(lableTOname(nodes, ref));
                 links.add(temp);
             }
-            /*for(String ref2 : refs){
-                changeValue(ref2);
-			}
-			*/
         }
     }
 

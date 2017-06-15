@@ -34,4 +34,17 @@ public class ResultBean {
         this.links = links;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder nodesList = new StringBuilder("nodes:").append("\n");
+        for (NodeBean nodeBean : nodes) {
+            nodesList.append(nodeBean.toString()).append("\n");
+        }
+
+        StringBuilder linksList = new StringBuilder("links:").append("\n");
+        for (LinkBean linkBean : links) {
+            linksList.append(linkBean.toString()).append("\n");
+        }
+        return nodesList.toString() + "\n*******************\n" + linksList.toString();
+    }
 }
