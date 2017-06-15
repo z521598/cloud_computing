@@ -36,12 +36,12 @@ public class ResultBean {
 
     @Override
     public String toString() {
-        StringBuilder nodesList = new StringBuilder("nodes:").append("\n");
+        StringBuilder nodesList = new StringBuilder("nodes:").append(nodes.size()).append("\n");
         for (NodeBean nodeBean : nodes) {
             nodesList.append(nodeBean.toString()).append("\n");
         }
 
-        StringBuilder linksList = new StringBuilder("links:").append("\n");
+        StringBuilder linksList = new StringBuilder("links:").append(links.size()).append("\n");
         for (LinkBean linkBean : links) {
             linksList.append(linkBean.toString()).append("\n");
         }

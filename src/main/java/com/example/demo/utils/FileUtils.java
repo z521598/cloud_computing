@@ -20,7 +20,7 @@ public class FileUtils {
                 return null;
             } else {
                 for (File afile : files) {
-                    if (afile.isFile()) {
+                    if (afile.isFile() && !afile.isHidden()) {
                         list.add(afile.getName());
                     }
                 }

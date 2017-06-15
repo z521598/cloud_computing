@@ -59,8 +59,10 @@ public class NodeBean {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("{name:").append(name).append(";").append("value:").append(value).append(";");
-        stringBuilder.append("label:").append(label).append("}");
+        stringBuilder.append("{name:").append(name).append(";");
+        stringBuilder.append("category:").append(category).append(";").append("value:").append(value).append(";");
+        stringBuilder.append("label:").append(label);
+        stringBuilder.append("}");
         return stringBuilder.toString();
     }
 }

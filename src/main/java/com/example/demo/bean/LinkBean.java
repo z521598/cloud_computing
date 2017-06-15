@@ -61,7 +61,9 @@ public class LinkBean {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("{source:").append(source).append(";").append("target:").append(target).append("}");
+        stringBuilder.append("{source:").append(source).append(";").append("target:").append(target);
+        stringBuilder.append(";").append("value:").append(value).append(";").append("label:").append(label);
+        stringBuilder.append("}");
         return stringBuilder.toString();
     }
 }

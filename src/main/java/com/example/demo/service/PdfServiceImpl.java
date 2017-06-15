@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Service
 public class PdfServiceImpl implements PdfService {
-    static int No = 1;
+    static int NO = 0;
 
     @Value("${file.pdf.home}")
     private String pdfHome;
@@ -43,6 +43,7 @@ public class PdfServiceImpl implements PdfService {
         resultBean.setLinks(links);
         resultBean.setNodes(nodes);
         System.out.println(resultBean);
+        NO = 0;
         return resultBean;
     }
 
@@ -59,18 +60,18 @@ public class PdfServiceImpl implements PdfService {
             if (!isContained(nodes, author)) {
                 NodeBean nodebean = new NodeBean();
                 nodebean.setLabel(author);
-                nodebean.setName(No);
+                nodebean.setName(NO);
                 nodes.add(nodebean);
                 System.out.println(author + "添加成功,信息如下:" + nodebean.getName());
-                No++;
+                NO++;
             }
             for (String ref : refs) {
                 if (!isContained(nodes, ref)) {
                     NodeBean nodebean = new NodeBean();
                     nodebean.setLabel(ref);
-                    nodebean.setName(No);
+                    nodebean.setName(NO);
                     nodes.add(nodebean);
-                    No++;
+                    NO++;
                     System.out.println(ref + "添加成功,信息如下:" + nodebean.getName());
                 }
 
